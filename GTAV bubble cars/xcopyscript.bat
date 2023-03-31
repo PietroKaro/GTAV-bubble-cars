@@ -1,1 +1,0 @@
-xcopy /y "..\x64\Debug\GTAVBubbleCars.asi" "D:\Programmi\Epic Games\GTAV" 
