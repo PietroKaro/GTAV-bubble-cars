@@ -361,3 +361,20 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/GTAV bubble cars/inc/native_wrapper.h
+/GTAV bubble cars/inc/natives.h
+/GTAV bubble cars/inc/nativeCaller.h
+/GTAV bubble cars/inc/main.h
+/GTAV bubble cars/inc/keyboard.h
+/GTAV bubble cars/inc/gta_pool.h
+/GTAV bubble cars/inc/gta_math.h
+/GTAV bubble cars/inc/gtav_types.h
+/GTAV bubble cars/inc/caroz_lib.h
+/GTAV bubble cars/inc/native_wrapper.cpp
+/GTAV bubble cars/inc/keyboard.cpp
+/GTAV bubble cars/inc/gta_pool_get.cpp
+/GTAV bubble cars/inc/gta_pool.cpp
+/GTAV bubble cars/inc/gta_math.cpp
+/GTAV bubble cars/inc/caroz_lib.cpp
+/GTAV bubble cars/xcopyscript.bat
+/GTAV bubble cars/lib
