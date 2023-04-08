@@ -33,7 +33,7 @@ float readVelParam(const string& line)
 	float velocity;
 	if (!(iss >> velocity) || velocity < 0.5f || velocity > 50.0f)
 	{
-		hud::showNotification("Up velocity config value is invalid. Default will be used.");
+		hud::showNotification("Config value \"UpVelocity\" is invalid. Default will be used.");
 		velocity = 1.0f;
 	}
 	return velocity;
@@ -53,7 +53,7 @@ bool readClearParam(const string& line)
 		else if (valstr == "FALSE")
 			return false;
 	}
-	hud::showNotification("Clear config value is invalid. Default will be used.");
+	hud::showNotification("Config value \"Clear\" is invalid. Default will be used.");
 	return true;
 }
 
@@ -62,12 +62,12 @@ pair<float, bool> readScriptData()
 	ifstream ifs{ "GTAVBubbleCars.ini" };
 	if (!ifs)
 	{
-		hud::showNotification("Unable to read script config file. Default config will be used");
+		hud::showNotification("Unable to read script config file. Default config will be used.");
 		return pair<float, bool>(1.0f, false);
 	}
 	string line1, line2;
 	if (!getline(ifs, line1) || !getline(ifs, line2))
-		hud::showNotification("Error while reading config values. Default values will be used");
+		hud::showNotification("Error while reading config values. Default values will be used.");
 	return pair<float, bool>{ readVelParam(line1), readClearParam(line2) };
 }
 
@@ -103,10 +103,7 @@ void touchCheck(list<TouchedVehicle>& vehList)
 void bubbleCars(list<TouchedVehicle>& veh_list, float upVelocity)
 {
 	if (veh_list.size() >= TOUCHED_MAX)
-	{
 		removeInvalidVehs(veh_list);
-		hud::showNotification("Superata soglia 50 veicoli, lista pulita.");
-	}
 	for (TouchedVehicle& tv : veh_list)
 	{
 		if (!tv.vehicle)
@@ -129,7 +126,6 @@ void mainLoop()
 	int key_stop = VK_NUMPAD0;
 	int key_bubble_all = VK_NUMPAD3;
 	auto script_data = readScriptData();
-	hud::showNotification(to_string(script_data.first) + "   " + to_string(script_data.second));
 	list<TouchedVehicle> touched_vehs;
 	while (true)
 	{
@@ -138,22 +134,9 @@ void mainLoop()
 			scriptWait(200);
 			is_cheat_running = true;
 			if (!script_data.second)
-			{
 				removeInvalidVehs(touched_vehs);
-				
-				hud::showNotification("Lista pulita da veicoli invalidi.");
-			}
 			hud::printMessage("BUBBLECARS cheat activated!", 2000, true);
 		}
-
-
-		if (IsKeyDown(VK_NUMPAD6))
-		{
-			scriptWait(200);
-			hud::showNotification((int)touched_vehs.size());
-		}
-
-
 		if (is_cheat_running)
 		{
 			if (IsKeyDown(key_bubble_all))
@@ -172,15 +155,9 @@ void mainLoop()
 			{
 				scriptWait(200);
 				if (script_data.second)
-				{
 					touched_vehs.clear();
-					hud::showNotification("Lista pulita da tutti i veicoli.");
-				}
 				else
-				{
 					resetTouchedVehs(touched_vehs);
-					hud::showNotification("Lista resettata.");
-				}
 				hud::printMessage("BUBBLECARS cheat deactivated!", 2000, true);
 				is_cheat_running = false;
 			}
