@@ -11,6 +11,7 @@
 #include "inc/gta_math.h"
 
 using namespace std;
+using namespace PED;
 
 constexpr short BUBBLECARS_MAX = 256;
 constexpr short TOUCHED_MAX = 50;
@@ -92,9 +93,12 @@ void uniquePushBack(list<TouchedVehicle>& vehList, TouchedVehicle item)	// Avoid
 void touchCheck(list<TouchedVehicle>& vehList)
 {
 	auto world_veh = getAllVehicles<BUBBLECARS_MAX>();
-	Vehicle player_veh = Ped::player().getCurrentVehicle();
+	Ped player = Ped::player();
+	Vehicle player_veh = player.getCurrentVehicle();
 	if (!player_veh)
 		return;
+	if (IS_PED_ON_FOOT(player.getHandle()))
+		RESET_PED_LAST_VEHICLE(player.getHandle());	// getCurrentVehicle() includes the last vehicle so can return true even if the player is on foot. This would exclude last vehicle from floating vehicles list
 	for (Vehicle v : world_veh)
 		if (v != player_veh && v.isTouching(player_veh))
 			uniquePushBack(vehList, TouchedVehicle{ v });
